@@ -143,6 +143,35 @@
 
         }
 
+        function delete($data){
+            if($this->head === null){
+                return "La lista estaba previamente vacia. \n";
+            }
+
+            if($this->head->value === $data){
+                print("Se Encontro. \n");
+                $this->head = $this->head->next;
+                return "Encontrado";
+            }
+            
+            
+            $aux = $this->head;
+
+
+            while($aux->next !== null ){
+               if($aux->next->value == $data){
+                $aux->next = $aux->next->next;
+                print("Si se elimino. \n");
+                return "Se ha eliminado el dato.";
+               }
+
+                $aux = $aux->next;
+            }
+
+            return "Ese dato no existe en la lista.";
+
+        }
+
     }
 
 
@@ -151,4 +180,77 @@
     $listita->insert(5);
     $listita->insert(null);
     print_r($listita);
+
+
+    class Node{
+        public $value;
+        public $left;
+        public $right;
+
+        function __construct($data)
+        {
+            $this->value = $data;
+            $this->left = null;
+            $this->right = null;
+        }
+    }
+
+    class BinaryTree{
+        public $root;
+
+        function __construct()
+        {
+            $this->root = null;
+        }
+
+        function insert($data){
+            //Creamos el nuevo nodo con el valor
+            $newNode = new Node($data);
+
+            // CHEQUEAMOS SI LA RAIZ ESTA VACIA
+            if($this->root === null){
+                //Guardamos el nuevo nodo en la raiz
+                $this->root = $newNode;
+                return $this->root;
+            }
+
+            //Variable auxiliar para luego ir avanzando de nodo iniciando en la RAIZ
+            $currentNode = $this->root;
+            $flag = true;
+            while($flag){
+                //CUANDO EL NODO YA EXISTA PREVIAMENTE
+                if($newNode->value == $currentNode->value) return "Che cuchame, ya existe pa \n";
+
+                //Comparamos el valor del nuevo nodo, con respecto al nodo ACTUAL
+            if($newNode->value > $currentNode->value){
+                //CASO EN QUE SEA MAYOR
+                if($currentNode->right === null ){
+                    $currentNode->right = $newNode;
+                    return $newNode;
+                }
+                $currentNode = $currentNode->right;
+            }else{
+                //CASO EN QUE SEA MENOR
+                if($currentNode->left === null){
+                    $currentNode->left = $newNode;
+                    return $newNode;
+                }
+                $currentNode = $currentNode->left;
+            }
+            }
+        }
+
+    }
+
+    $arbolito = new BinaryTree();
+    $arbolito->insert(5);
+    $arbolito->insert(10);
+    $arbolito->insert(3);
+    $arbolito->insert(15);
+    $arbolito->insert(12);
+    print($arbolito->insert(12));
+    print_r($arbolito);
+    
+
+    
 ?>
