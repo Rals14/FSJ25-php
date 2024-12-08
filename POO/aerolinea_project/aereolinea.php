@@ -18,7 +18,9 @@ class Aerolinea{
 
     //Abstraccion -> Metodos para interactuar con propiedades/atributos encapsulados
     //Getters y Setters
-
+    /**
+     * Get the value of id
+     */ 
     public function getId()
     {
         return $this->id;
@@ -79,6 +81,7 @@ class Aerolinea{
 
         return $this->tipo_aerolinea;
     }
+
 }
 
 ?>
